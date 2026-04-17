@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlueHarbor Hybrid Cargo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">BH</div>
+      <div>
+        <strong>BlueHarbor Hybrid Cargo</strong>
+        <small>Interactive marine logistics platform</small>
+      </div>
+    </div>
+    <nav>
+      <a href="#booking">Booking</a>
+      <a href="#fleet">Fleet</a>
+      <a href="#tracking">Tracking</a>
+      <a href="#insights">Insights</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Young entrepreneur shipping startup</span>
+        <h1>Predict cargo cost, track shipments, and monitor hybrid vessel performance.</h1>
+        <p>
+          A responsive and interactive prototype for a hybrid cargo ship company. It forecasts carbon emissions at booking time,
+          simulates live fleet health, tracks cargo milestones, and explains why hybrid propulsion gives SME operators a business advantage.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#booking">Try booking calculator</a>
+          <a class="btn btn-secondary" href="#fleet">Open live dashboard</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="metric big">
+          <span id="weeklyCarbonSaved">18.7 t</span>
+          <label>Estimated CO₂ avoided this week</label>
+        </div>
+        <div class="metric-grid">
+          <div class="metric"><span id="activeVoyages">3</span><label>Active vessels</label></div>
+          <div class="metric"><span id="avgBattery">69%</span><label>Average battery</label></div>
+          <div class="metric"><span id="avgFuel">66%</span><label>Average fuel</label></div>
+          <div class="metric"><span id="avgEmission">375 kg/hr</span><label>Average emissions</label></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="booking">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Predictive booking engine</span>
+          <h2>Carbon, cost, route and weather forecast at booking time</h2>
+        </div>
+        <span class="pill">Interactive model</span>
+      </div>
+
+      <div class="booking-layout">
+        <form class="panel controls" id="bookingForm">
+          <div class="field">
+            <label for="route">Route</label>
+            <select id="route"></select>
+          </div>
+          <div class="field">
+            <label for="cargoType">Cargo type</label>
+            <select id="cargoType"></select>
+          </div>
+          <div class="field">
+            <label for="weather">Weather profile</label>
+            <select id="weather"></select>
+          </div>
+          <div class="field">
+            <label for="load">Cargo load (tonnes)</label>
+            <input id="load" type="range" min="80" max="500" value="280" />
+            <div class="range-value"><span id="loadValue">280</span> t</div>
+          </div>
+          <div class="field">
+            <label for="delay">Departure delay buffer (hours)</label>
+            <input id="delay" type="range" min="0" max="24" value="4" />
+            <div class="range-value"><span id="delayValue">4</span> hrs</div>
+          </div>
+          <button type="button" class="btn btn-primary full" id="recalculateBtn">Recalculate voyage</button>
+        </form>
+
+        <div class="panel results">
+          <div class="result-grid">
+            <div class="metric highlight"><span id="voyagePrice">£0</span><label>Predicted booking price</label></div>
+            <div class="metric"><span id="etaDays">0</span><label>Predicted ETA (days)</label></div>
+            <div class="metric"><span id="reliabilityScore">0</span><label>Reliability score</label></div>
+            <div class="metric"><span id="carbonSaved">0</span><label>CO₂ saved vs conventional</label></div>
+          </div>
+
+          <div class="split-card">
+            <div>
+              <h3>Hybrid propulsion split</h3>
+              <div class="progress-wrap">
+                <label>Electric segment</label>
+                <div class="progress"><div id="electricBar"></div></div>
+                <small id="electricText">0 nm</small>
+              </div>
+              <div class="progress-wrap">
+                <label>Fuel segment</label>
+                <div class="progress progress-dark"><div id="fuelBar"></div></div>
+                <small id="fuelText">0 nm</small>
+              </div>
+            </div>
+            <div class="mini-stats">
+              <div><strong id="hybridEmission">0 kg</strong><span>Hybrid CO₂</span></div>
+              <div><strong id="conventionalEmission">0 kg</strong><span>Conventional CO₂</span></div>
+              <div><strong id="carbonIntensity">0 kg/t</strong><span>Carbon intensity</span></div>
+              <div><strong id="hybridFuelCost">£0</strong><span>Fuel cost estimate</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="fleet">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Live fleet monitor</span>
+          <h2>Simulated real-time vessel monitoring dashboard</h2>
+        </div>
+        <button class="btn btn-secondary" id="toggleSimulation">Pause live simulation</button>
+      </div>
+      <div class="fleet-grid" id="fleetGrid"></div>
+    </section>
+
+    <section class="section two-col" id="tracking">
+      <div class="panel">
+        <div class="section-head small">
+          <div>
+            <span class="eyebrow">Cargo tracking</span>
+            <h2>Shipment milestone timeline</h2>
+          </div>
+        </div>
+        <div class="timeline" id="timeline"></div>
+      </div>
+
+      <div class="panel">
+        <div class="section-head small">
+          <div>
+            <span class="eyebrow">Recommended platform features</span>
+            <h2>What makes the product investor-ready</h2>
+          </div>
+        </div>
+        <div class="feature-list">
+          <div class="feature-item"><strong>Predictive booking intelligence</strong><span>Calculate cost, ETA and emissions before the cargo is booked.</span></div>
+          <div class="feature-item"><strong>Hybrid operations dashboard</strong><span>Show battery, fuel, emissions and propulsion mode in one place.</span></div>
+          <div class="feature-item"><strong>Customer cargo visibility</strong><span>Track milestones and provide better ETA transparency to SME customers.</span></div>
+          <div class="feature-item"><strong>ESG reporting</strong><span>Give customers shipment-level carbon savings for procurement and Scope 3 reporting.</span></div>
+          <div class="feature-item"><strong>Route risk awareness</strong><span>Use load and weather to flag reliability and cost shifts before departure.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="insights">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Business case</span>
+          <h2>Why this concept matters</h2>
+        </div>
+      </div>
+      <div class="insights-grid">
+        <div class="panel insight"><h3>For customers</h3><p>Lower-emission freight, more transparent pricing, and better schedule confidence.</p></div>
+        <div class="panel insight"><h3>For operators</h3><p>Fuel savings, dual-propulsion resilience, and stronger differentiation against larger incumbents.</p></div>
+        <div class="panel insight"><h3>For investors</h3><p>A digital logistics platform paired with cleaner vessel operations and measurable ESG value.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Built as a GitHub Pages-ready interactive prototype for an ARC7069 design sprint presentation.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
