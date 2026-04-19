@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlueHarbor Nexus | Hybrid Marine Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-wrap">
+        <img src="assets/logo-nexus.svg" alt="BlueHarbor Nexus logo" class="brand-logo" />
+        <div>
+          <h1>BlueHarbor Nexus</h1>
+          <p>Hybrid marine logistics intelligence</p>
+        </div>
+      </div>
+
+      <nav class="side-nav">
+        <a href="#overview" class="active"><span>Overview</span></a>
+        <a href="#booking"><span>Booking Engine</span></a>
+        <a href="#map"><span>Route Intelligence</span></a>
+        <a href="#fleet"><span>Fleet Operations</span></a>
+        <a href="#tracking"><span>Tracking</span></a>
+      </nav>
+
+      <div class="sidebar-card">
+        <span class="mini-label">Live fleet state</span>
+        <strong id="sidebarActiveVessels">3 vessels active</strong>
+        <p>Hybrid dispatch, route monitoring, and carbon visibility for SME shipping operations.</p>
+      </div>
+
+      <div class="sidebar-card compact">
+        <span class="mini-label">Weekly carbon avoided</span>
+        <strong id="sidebarCarbon">18.7 t CO₂</strong>
+      </div>
+    </aside>
+
+    <div class="content-shell">
+      <header class="topbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+        <div>
+          <span class="mini-label">Deployable GitHub Pages prototype</span>
+          <h2>Interactive SaaS dashboard for hybrid cargo shipping</h2>
+        </div>
+        <div class="topbar-actions">
+          <button class="ghost-btn" id="themePulseBtn">Pulse metrics</button>
+          <a class="primary-btn" href="#booking">New booking</a>
+        </div>
+      </header>
+
+      <main class="main-grid">
+        <section class="hero-panel card" id="overview">
+          <div class="hero-copy">
+            <span class="badge">SME logistics startup platform</span>
+            <h3>Predict cost, emissions, and routing performance before a cargo slot is confirmed.</h3>
+            <p>
+              BlueHarbor Nexus is a customer-facing hybrid shipping platform that combines booking intelligence,
+              real-time fleet operations, cargo tracking, and weather-aware carbon forecasting in one deployable dashboard.
+            </p>
+            <div class="hero-actions">
+              <a class="primary-btn" href="#booking">Run predictive booking</a>
+              <a class="secondary-btn" href="#map">View live route map</a>
+            </div>
+            <div class="chip-row">
+              <span class="chip">Electric berth departure</span>
+              <span class="chip">Fuel reserve for long-haul</span>
+              <span class="chip">Load + weather carbon logic</span>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <div class="hero-visual card inset">
+              <img id="heroImage" src="assets/hero-ship.svg" alt="Hybrid cargo ship visualization" />
+              <div class="hero-caption">
+                <strong id="heroTitle">Hybrid vessel departure mode</strong>
+                <p id="heroText">Battery-assisted port departure keeps berth-side emissions and noise lower during loading operations.</p>
+              </div>
+            </div>
+            <div class="thumb-row" id="heroThumbs"></div>
+          </div>
+        </section>
+
+        <section class="metrics-row">
+          <article class="metric card accent-aqua"><span id="mCarbon">18.7 t</span><label>Weekly CO₂ avoided</label></article>
+          <article class="metric card accent-blue"><span id="mReliability">93/100</span><label>Average reliability</label></article>
+          <article class="metric card accent-gold"><span id="mBattery">69%</span><label>Fleet battery average</label></article>
+          <article class="metric card accent-coral"><span id="mEmission">375 kg/hr</span><label>Fleet emission rate</label></article>
+        </section>
+
+        <section class="booking card" id="booking">
+          <div class="section-header">
+            <div>
+              <span class="mini-label">Predictive booking engine</span>
+              <h3>Dynamic cargo pricing, ETA, propulsion split, and carbon forecast</h3>
+            </div>
+            <span class="status-pill">Responsive and interactive</span>
+          </div>
+
+          <div class="booking-layout">
+            <form class="form-panel" id="bookingForm">
+              <div class="field-grid">
+                <label>
+                  <span>Route</span>
+                  <select id="route"></select>
+                </label>
+                <label>
+                  <span>Cargo type</span>
+                  <select id="cargoType"></select>
+                </label>
+                <label>
+                  <span>Weather profile</span>
+                  <select id="weather"></select>
+                </label>
+                <label>
+                  <span>Booking reference</span>
+                  <input type="text" id="bookingRef" value="BH-2048-NR" />
+                </label>
+              </div>
+
+              <label class="range-row">
+                <div class="range-head"><span>Cargo load</span><strong id="loadValue">280 tonnes</strong></div>
+                <input type="range" min="80" max="500" value="280" id="load" />
+              </label>
+
+              <label class="range-row">
+                <div class="range-head"><span>Departure delay buffer</span><strong id="delayValue">4 hours</strong></div>
+                <input type="range" min="0" max="24" value="4" id="delay" />
+              </label>
+
+              <div class="toggle-grid">
+                <label class="toggle-card active">
+                  <input type="checkbox" id="shorePower" checked />
+                  <strong>Shore power</strong>
+                  <small>Reduces berth emissions during loading</small>
+                </label>
+                <label class="toggle-card active">
+                  <input type="checkbox" id="priorityGreen" checked />
+                  <strong>Green corridor mode</strong>
+                  <small>Prioritises electric segments where available</small>
+                </label>
+              </div>
+
+              <button type="button" class="primary-btn full" id="recalculateBtn">Recalculate booking</button>
+            </form>
+
+            <div class="results-panel">
+              <div class="result-cards">
+                <article class="metric card"><span id="voyagePrice">£0</span><label>Predicted booking price</label></article>
+                <article class="metric card"><span id="etaDays">0 days</span><label>Predicted ETA</label></article>
+                <article class="metric card"><span id="reliabilityScore">0/100</span><label>Reliability score</label></article>
+                <article class="metric card"><span id="carbonSaved">0 t</span><label>CO₂ saved vs conventional</label></article>
+              </div>
+
+              <div class="split-panel card inset">
+                <div class="split-left">
+                  <div class="mini-label">Hybrid propulsion split</div>
+                  <div class="progress-group">
+                    <div class="progress-head"><span>Electric segment</span><small id="electricText">0 nm</small></div>
+                    <div class="progress-track"><div id="electricBar" class="progress-fill electric"></div></div>
+                  </div>
+                  <div class="progress-group">
+                    <div class="progress-head"><span>Fuel segment</span><small id="fuelText">0 nm</small></div>
+                    <div class="progress-track secondary"><div id="fuelBar" class="progress-fill fuel"></div></div>
+                  </div>
+                </div>
+                <div class="split-stats">
+                  <article><strong id="hybridEmission">0 kg</strong><span>Hybrid CO₂</span></article>
+                  <article><strong id="conventionalEmission">0 kg</strong><span>Conventional CO₂</span></article>
+                  <article><strong id="carbonIntensity">0 kg/t</strong><span>Carbon intensity</span></article>
+                  <article><strong id="hybridFuelCost">£0</strong><span>Fuel cost estimate</span></article>
+                </div>
+              </div>
+
+              <div class="insight-panel card inset">
+                <div class="mini-label">Decision support</div>
+                <h4 id="insightTitle">Booking insight</h4>
+                <p id="insightText">Select a route and load profile to generate operating recommendations.</p>
+                <div class="chip-row" id="insightTags"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="map-section card" id="map">
+          <div class="section-header">
+            <div>
+              <span class="mini-label">Map-style route intelligence</span>
+              <h3>Visual route planning with vessel position, weather intensity, and operating mode</h3>
+            </div>
+            <span class="status-pill" id="routeRiskTag">Moderate weather risk</span>
+          </div>
+
+          <div class="map-layout">
+            <div class="map-panel inset">
+              <svg viewBox="0 0 960 520" class="route-map" id="routeMap" aria-label="Route map">
+                <defs>
+                  <linearGradient id="routeGradient" x1="0" x2="1">
+                    <stop offset="0%" stop-color="#38bdf8"/>
+                    <stop offset="100%" stop-color="#22c55e"/>
+                  </linearGradient>
+                  <filter id="softGlow">
+                    <feGaussianBlur stdDeviation="6" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                </defs>
+                <rect x="0" y="0" width="960" height="520" rx="24" fill="#08131f"></rect>
+                <g opacity="0.18">
+                  <path d="M80 100 C 180 50, 270 70, 360 140 S 540 240, 660 200 S 820 120, 900 180" fill="none" stroke="#1f3a52" stroke-width="84" stroke-linecap="round"/>
+                  <path d="M80 360 C 160 330, 240 380, 320 340 S 520 280, 620 330 S 840 430, 920 360" fill="none" stroke="#112638" stroke-width="78" stroke-linecap="round"/>
+                </g>
+                <path id="routePath" d="M110 380 C 230 350, 270 280, 380 250 S 560 220, 660 180 S 810 140, 860 110" fill="none" stroke="url(#routeGradient)" stroke-width="8" stroke-linecap="round" stroke-dasharray="14 12"/>
+                <circle cx="110" cy="380" r="10" fill="#22c55e"/>
+                <circle cx="860" cy="110" r="10" fill="#f59e0b"/>
+                <text x="82" y="408" fill="#cbd5e1" font-size="18">Origin</text>
+                <text x="810" y="88" fill="#cbd5e1" font-size="18">Destination</text>
+                <g id="weatherClusterA">
+                  <circle cx="420" cy="240" r="26" fill="#60a5fa" opacity="0.18"></circle>
+                  <circle cx="420" cy="240" r="14" fill="#60a5fa" opacity="0.42"></circle>
+                </g>
+                <g id="weatherClusterB">
+                  <circle cx="660" cy="180" r="22" fill="#f59e0b" opacity="0.18"></circle>
+                  <circle cx="660" cy="180" r="12" fill="#f59e0b" opacity="0.42"></circle>
+                </g>
+                <g id="shipMarker" filter="url(#softGlow)">
+                  <circle id="shipGlow" cx="200" cy="340" r="20" fill="#38bdf8" opacity="0.2"></circle>
+                  <path id="shipShape" d="M188 336 L214 336 L224 346 L200 356 L176 346 Z" fill="#dbeafe" stroke="#38bdf8" stroke-width="2"></path>
+                </g>
+              </svg>
+            </div>
+
+            <div class="map-side">
+              <div class="card inset status-list">
+                <div>
+                  <span class="mini-label">Current route</span>
+                  <h4 id="routeStatusTitle">Rotterdam → Hamburg</h4>
+                </div>
+                <ul>
+                  <li><span>Wind forecast</span><strong id="routeWind">18 kn</strong></li>
+                  <li><span>Wave state</span><strong id="routeWave">1.8 m</strong></li>
+                  <li><span>Operating mode</span><strong id="routeMode">Electric blend</strong></li>
+                  <li><span>Distance remaining</span><strong id="routeDistance">164 nm</strong></li>
+                </ul>
+              </div>
+              <div class="card inset route-gallery">
+                <img id="routeImage" src="assets/route-terminal.svg" alt="Route operations visual" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="fleet-section card" id="fleet">
+          <div class="section-header">
+            <div>
+              <span class="mini-label">Fleet operations dashboard</span>
+              <h3>Click a vessel to inspect battery, fuel, emissions, weather exposure, and cargo readiness</h3>
+            </div>
+            <button class="ghost-btn" id="toggleSimulation">Pause live simulation</button>
+          </div>
+
+          <div class="fleet-layout">
+            <div class="fleet-grid" id="fleetGrid"></div>
+            <aside class="focus-card card inset" id="vesselFocus"></aside>
+          </div>
+        </section>
+
+        <section class="tracking-section card" id="tracking">
+          <div class="section-header">
+            <div>
+              <span class="mini-label">Shipment tracking</span>
+              <h3>Review milestone progress, operating mode, and dispatch status by booking reference</h3>
+            </div>
+            <button class="ghost-btn" id="advanceTracking">Advance milestone</button>
+          </div>
+
+          <div class="tracking-layout">
+            <div class="card inset tracking-card">
+              <label class="tracking-select">
+                <span>Tracking reference</span>
+                <select id="trackingSelect"></select>
+              </label>
+              <div id="timeline" class="timeline"></div>
+            </div>
+            <div class="card inset summary-card">
+              <img src="assets/tracking-hub.svg" alt="Cargo and trailer operations visual" class="summary-image" />
+              <div>
+                <span class="mini-label">Live logistics summary</span>
+                <h4 id="trackingHeadline">Terminal gate and berth flow aligned</h4>
+                <p id="trackingBody">Trailer arrival sequencing, vessel slot timing, and berth-side electric operations remain aligned to the current dispatch plan.</p>
+                <div class="chip-row" id="trackingTags"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
